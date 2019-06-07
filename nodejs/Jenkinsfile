@@ -7,7 +7,9 @@ node{
   }
   
   stage('Build img'){
+    dir('nodejs/'){
     app = docker.build("/nodejs")
+    }
     }
     
     
