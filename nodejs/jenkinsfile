@@ -1,0 +1,27 @@
+node{
+
+  def app
+  
+  stage('clone repo'){
+    checkout scm
+  }
+  
+  stage('Build img'){
+    app = docker.build("nodejs/dockerfile")
+    }
+    
+    
+    stage('Test img'){
+      app.inside{
+        sh 'echo "Test Passed!"'
+      }
+    }
+    
+    stage('Push img'){
+      docker.withRegistery('https://registry.hub.docker.com','docker-hub-credentials'){
+            app.push("${env.BUILD_NUMBER}")
+            app.push("latest")
+      }
+    }
+    
+}
