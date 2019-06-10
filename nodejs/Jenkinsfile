@@ -8,7 +8,7 @@ node{
   
   stage('Build img'){
     dir('nodejs/'){
-    app = docker.build("/nodejs")
+    app = docker.build("getintodevops/hellonode")
     }
     }
     
